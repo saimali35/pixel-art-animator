@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pixel Art Animator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+
+    <h2 class="title">🎨 Pixel Art Animator</h2>
+
+    <div class="toolbar">
+      <label>Color: <input type="color" id="colorPicker" value="#FF0000"></label>
+      <label>Brush:
+        <select id="brushSize">
+          <option value="1">1x1</option>
+          <option value="2">2x2</option>
+          <option value="3">3x3</option>
+        </select>
+      </label>
+      <button id="eraserBtn">🧹 Eraser</button>
+      <button id="clearBtn">🗑 Clear Frame</button>
+      <button id="undoBtn">↩ Undo</button>
+      <button id="exportGifBtn">⬇ Export GIF</button>
+      <button id="exportSpriteBtn">⬇ Export Sprite Sheet</button>
+      <button id="saveProjectBtn">💾 Save Project</button>
+      <button id="loadProjectBtn">📂 Load Project</button>
+      <input type="file" id="loadProjectInput" accept=".json" style="display:none">
+      
+    </div>
+
+    <div class="main-area">
+
+      <div class="canvas-wrapper">
+        <canvas id="pixelCanvas" width="320" height="320"></canvas>
+        <div class="anim-controls">
+          <button id="playBtn">▶ Play</button>
+          <button id="pauseBtn">⏸ Pause</button>
+          <label>Speed (ms): <input type="number" id="speedInput" value="150" min="30" max="2000"></label>
+          <label>
+            <input type="checkbox" id="onionToggle"> Onion Skin
+          </label>
+        </div>
+      </div>
+
+      <div class="sidebar">
+        <h3>Frames</h3>
+        <div class="frame-list" id="frameList"></div>
+        <div class="frame-controls">
+          <button id="addFrameBtn">+ Add</button>
+          <button id="duplicateFrameBtn">⧉ Duplicate</button>
+          <button id="deleteFrameBtn">✕ Delete</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
