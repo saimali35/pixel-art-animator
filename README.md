@@ -2,7 +2,7 @@
 
 A browser-based pixel art editor with frame-by-frame animation, built using **vanilla JavaScript** and the **Canvas API** — no frameworks, no dependencies.
 
-🔗 **Live Demo:** [https://saimali1254.github.io/pixel-art-animator/](https://saimali1254.github.io/pixel-art-animator/)
+🔗 **Live Demo:** [https://saimali35.github.io/pixel-art-animator/](https://saimali35.github.io/pixel-art-animator/)
 
 ---
 
