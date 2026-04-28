@@ -506,3 +506,67 @@ document.getElementById('loadProjectInput').addEventListener('change', (e) => {
   };
   reader.readAsText(file);
 });
+// =====================
+//   IMPORT IMAGE AS FRAME
+// =====================
+document.getElementById('importImageBtn').addEventListener('click', () => {
+  document.getElementById('importImageInput').click();
+});
+
+document.getElementById('importImageInput').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    const img = new Image();
+    img.onload = () => {
+      // Draw image onto offscreen canvas scaled to 32x32
+      const offCanvas = document.createElement('canvas');
+      offCanvas.width = GRID_SIZE;
+      offCanvas.height = GRID_SIZE;
+      const offCtx = offCanvas.getContext('2d');
+
+      // Scale image down to grid size
+      offCtx.drawImage(img, 0, 0, GRID_SIZE, GRID_SIZE);
+
+      // Convert each pixel to hex color and build frame
+      const newFrame = createEmptyFrame();
+      const imageData = offCtx.getImageData(0, 0, GRID_SIZE, GRID_SIZE);
+      const data = imageData.data; // [r,g,b,a, r,g,b,a, ...]
+
+      for (let row = 0; row < GRID_SIZE; row++) {
+        for (let col = 0; col < GRID_SIZE; col++) {
+          const i = (row * GRID_SIZE + col) * 4;
+          const r = data[i];
+          const g = data[i + 1];
+          const b = data[i + 2];
+          const a = data[i + 3];
+
+          // If pixel is transparent treat as white
+          if (a < 128) {
+            newFrame[row][col] = '#FFFFFF';
+          } else {
+            newFrame[row][col] =
+              '#' +
+              r.toString(16).padStart(2, '0') +
+              g.toString(16).padStart(2, '0') +
+              b.toString(16).padStart(2, '0');
+          }
+        }
+      }
+
+      // Add as new frame
+      frames.push(newFrame);
+      currentFrameIndex = frames.length - 1;
+      undoStack = [];
+      drawCanvas();
+      updateFrameThumbnails();
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+
+  // Reset input so same file can be loaded again
+  e.target.value = '';
+});
