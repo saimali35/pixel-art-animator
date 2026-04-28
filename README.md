@@ -20,6 +20,7 @@ A browser-based pixel art editor with frame-by-frame animation, built using **va
 - ⬇ **Export as Sprite Sheet** — all frames in one PNG
 - 💾 **Save Project** — download your work as JSON
 - 📂 **Load Project** — reload a saved JSON project
+- 🖼 **Import Image**  — import your image 
 - 📱 **Mobile responsive** — works on phones with touch drawing support
 
 ---
