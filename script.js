@@ -1,6 +1,4 @@
-// =====================
-//   CONSTANTS & STATE
-// =====================
+// CONSTANTS & STATE
 const GRID_SIZE = 32;
 const CELL_SIZE = 10;
 
@@ -18,9 +16,7 @@ let animationSpeed = 150;
 let onionSkinEnabled = false;
 let undoStack = [];   // stores snapshots of current frame before each stroke
 
-// =====================
-//   FRAME HELPERS
-// =====================
+// FRAME HELPERS
 function createEmptyFrame() {
   return Array(GRID_SIZE).fill(null).map(() =>
     Array(GRID_SIZE).fill('#FFFFFF')
@@ -31,17 +27,13 @@ function deepCopyFrame(frame) {
   return frame.map(row => [...row]);
 }
 
-// =====================
-//   INIT
-// =====================
+// INIT
 frames.push(createEmptyFrame());
 currentFrameIndex = 0;
 drawCanvas();
 updateFrameThumbnails();
 
-// =====================
-//   DRAW CANVAS
-// =====================
+// DRAW CANVAS
 function drawCanvas() {
   const frame = frames[currentFrameIndex];
 
@@ -72,9 +64,7 @@ function drawCanvas() {
   }
 }
 
-// =====================
-//   MOUSE DRAWING
-// =====================
+// MOUSE DRAWING
 function getCellFromMouse(e) {
   const rect = canvas.getBoundingClientRect();
   const scaleX = canvas.width / rect.width;
@@ -121,9 +111,8 @@ canvas.addEventListener('mousemove', (e) => {
 
 canvas.addEventListener('mouseup', () => isDrawing = false);
 canvas.addEventListener('mouseleave', () => isDrawing = false);
-// =====================
-//   TOUCH DRAWING
-// =====================
+
+// TOUCH DRAWING
 canvas.addEventListener('touchstart', (e) => {
   e.preventDefault();
   isDrawing = true;
@@ -156,9 +145,8 @@ function getCellFromTouch(e) {
   }
   return null;
 }
-// =====================
-//   FRAME THUMBNAILS
-// =====================
+
+// FRAME THUMBNAILS
 function updateFrameThumbnails() {
   const container = document.getElementById('frameList');
   container.innerHTML = '';
@@ -199,9 +187,7 @@ function updateFrameThumbnails() {
   });
 }
 
-// =====================
-//   FRAME CONTROLS
-// =====================
+// FRAME CONTROLS
 document.getElementById('addFrameBtn').addEventListener('click', () => {
   frames.push(createEmptyFrame());
   currentFrameIndex = frames.length - 1;
@@ -235,9 +221,7 @@ document.getElementById('clearBtn').addEventListener('click', () => {
   updateFrameThumbnails();
 });
 
-// =====================
-//   TOOLBAR EVENTS
-// =====================
+// TOOLBAR EVENTS
 document.getElementById('colorPicker').addEventListener('input', (e) => {
   currentColor = e.target.value;
   isErasing = false;
@@ -260,9 +244,7 @@ document.getElementById('undoBtn').addEventListener('click', () => {
   updateFrameThumbnails();
 });
 
-// =====================
-//   ANIMATION
-// =====================
+// ANIMATION
 document.getElementById('playBtn').addEventListener('click', () => {
   if (frames.length < 2) return alert('Add at least 2 frames to animate.');
   if (animationInterval) clearInterval(animationInterval);
@@ -295,9 +277,7 @@ document.getElementById('onionToggle').addEventListener('change', (e) => {
   drawCanvas();
 });
 
-// =====================
-//   EXPORT GIF (no external library)
-// =====================
+// EXPORT GIF (no external library)
 document.getElementById('exportGifBtn').addEventListener('click', () => {
   const colorSet = new Set();
   frames.forEach(frame => frame.forEach(row => row.forEach(c => colorSet.add(c))));
@@ -449,9 +429,7 @@ function gifLZW(pixels, minCodeSize) {
   return out;
 }
 
-// =====================
-//   EXPORT SPRITE SHEET
-// =====================
+// EXPORT SPRITE SHEET
 document.getElementById('exportSpriteBtn').addEventListener('click', () => {
   const sheetCanvas = document.createElement('canvas');
   sheetCanvas.width = GRID_SIZE * CELL_SIZE * frames.length;
@@ -474,9 +452,7 @@ document.getElementById('exportSpriteBtn').addEventListener('click', () => {
   link.click();
 });
 
-// =====================
-//   SAVE / LOAD PROJECT
-// =====================
+// SAVE / LOAD PROJECT
 document.getElementById('saveProjectBtn').addEventListener('click', () => {
   const data = JSON.stringify({ frames, currentFrameIndex });
   const blob = new Blob([data], { type: 'application/json' });
@@ -506,9 +482,8 @@ document.getElementById('loadProjectInput').addEventListener('change', (e) => {
   };
   reader.readAsText(file);
 });
-// =====================
-//   IMPORT IMAGE AS FRAME
-// =====================
+
+// IMPORT IMAGE AS FRAME
 document.getElementById('importImageBtn').addEventListener('click', () => {
   document.getElementById('importImageInput').click();
 });
