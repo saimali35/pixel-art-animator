@@ -1,6 +1,9 @@
 // CONSTANTS & STATE
 const GRID_SIZE = 32;
 const CELL_SIZE = 10;
+const ZOOM_MIN = 1;
+const ZOOM_MAX = 4;
+const ZOOM_STEP = 1;
 
 const canvas = document.getElementById('pixelCanvas');
 const ctx = canvas.getContext('2d');
@@ -14,6 +17,7 @@ let brushSize = 1;
 let animationInterval = null;
 let animationSpeed = 150;
 let onionSkinEnabled = false;
+let zoomLevel = 1;
 let undoStack = [];   // stores snapshots of current frame before each stroke
 
 // FRAME HELPERS
@@ -27,11 +31,20 @@ function deepCopyFrame(frame) {
   return frame.map(row => [...row]);
 }
 
+function updateCanvasScale() {
+  const size = GRID_SIZE * CELL_SIZE * zoomLevel;
+  canvas.style.width = `${size}px`;
+  canvas.style.height = `${size}px`;
+  const zoomValue = document.getElementById('zoomValue');
+  if (zoomValue) zoomValue.textContent = `${zoomLevel * 100}%`;
+}
+
 // INIT
 frames.push(createEmptyFrame());
 currentFrameIndex = 0;
 drawCanvas();
 updateFrameThumbnails();
+updateCanvasScale();
 
 // DRAW CANVAS
 function drawCanvas() {
@@ -275,6 +288,20 @@ document.getElementById('speedInput').addEventListener('change', (e) => {
 document.getElementById('onionToggle').addEventListener('change', (e) => {
   onionSkinEnabled = e.target.checked;
   drawCanvas();
+});
+
+document.getElementById('zoomOutBtn').addEventListener('click', () => {
+  if (zoomLevel > ZOOM_MIN) {
+    zoomLevel -= ZOOM_STEP;
+    updateCanvasScale();
+  }
+});
+
+document.getElementById('zoomInBtn').addEventListener('click', () => {
+  if (zoomLevel < ZOOM_MAX) {
+    zoomLevel += ZOOM_STEP;
+    updateCanvasScale();
+  }
 });
 
 // EXPORT GIF (no external library)

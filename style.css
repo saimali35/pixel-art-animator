@@ -99,6 +99,7 @@ body {
   align-items: center;
   gap: 10px;
   flex: 1;
+  overflow: auto;
 }
 
 #pixelCanvas {
@@ -106,10 +107,8 @@ body {
   cursor: crosshair;
   display: block;
   image-rendering: pixelated;
-  /* fill available width on mobile */
-  width: 100%;
-  max-width: 320px;
-  height: auto;
+  
+  width: 320px;`n  height: 320px;
   touch-action: none;
 }
 
@@ -139,6 +138,12 @@ body {
 .anim-controls button:hover,
 .anim-controls button:active {
   background: #e94560;
+}
+
+.zoom-value {
+  color: #9ad3bc;
+  font-size: 12px;
+  margin-left: 8px;
 }
 
 .anim-controls label {
@@ -277,7 +282,8 @@ body {
   .frame-controls button {
     width: auto;
     flex: 1;
-  }
+  overflow: auto;
+}
 
   /* Toolbar smaller on mobile */
   .toolbar button {
