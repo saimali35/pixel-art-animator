@@ -3,67 +3,82 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A browser-based pixel art editor with frame-by-frame animation, export to GIF, and sprite sheets.">
   <title>Pixel Art Animator</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><text y='20' font-size='20'>🎨</text></svg>">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <div class="app">
+  <main class="app">
 
-    <h2 class="title">🎨 Pixel Art Animator</h2>
+    <header class="app-header">
+      <h1 class="title">🎨 Pixel Art Animator</h1>
+    </header>
 
-    <div class="toolbar">
-      <label>Color: <input type="color" id="colorPicker" value="#FF0000"></label>
-      <label>Brush:
-        <select id="brushSize">
-          <option value="1">1x1</option>
-          <option value="2">2x2</option>
-          <option value="3">3x3</option>
-        </select>
-      </label>
-      <button id="eraserBtn">🧹 Eraser</button>
-      <button id="clearBtn">🗑 Clear Frame</button>
-      <button id="undoBtn">↩ Undo</button>
-      <button id="exportGifBtn">⬇ Export GIF</button>
-      <button id="exportSpriteBtn">⬇ Export Sprite Sheet</button>
-      <button id="saveProjectBtn">💾 Save Project</button>
-      <button id="loadProjectBtn">📂 Load Project</button>
-      <input type="file" id="loadProjectInput" accept=".json" style="display:none">
-      <button id="importImageBtn">🖼 Import Image</button>
-      <input type="file" id="importImageInput" accept="image/*" style="display:none">
+    <section class="toolbar" aria-label="Drawing tools">
+      <fieldset class="toolbar-group">
+        <legend>Drawing</legend>
+        <label>Color: <input type="color" id="colorPicker" value="#FF0000" aria-label="Color picker"></label>
+        <label>Brush:
+          <select id="brushSize" aria-label="Brush size">
+            <option value="1">1x1</option>
+            <option value="2">2x2</option>
+            <option value="3">3x3</option>
+          </select>
+        </label>
+        <button id="eraserBtn" aria-label="Eraser tool">🧹 Eraser</button>
+        <button id="clearBtn" aria-label="Clear current frame">🗑 Clear Frame</button>
+        <button id="undoBtn" aria-label="Undo last action">↩ Undo</button>
+      </fieldset>
 
-    </div>
+      <fieldset class="toolbar-group">
+        <legend>Export</legend>
+        <button id="exportGifBtn" aria-label="Export animation as GIF">⬇ Export GIF</button>
+        <button id="exportSpriteBtn" aria-label="Export all frames as sprite sheet">⬇ Export Sprite Sheet</button>
+      </fieldset>
 
-    <div class="main-area">
+      <fieldset class="toolbar-group">
+        <legend>Project</legend>
+        <button id="saveProjectBtn" aria-label="Save project as JSON">💾 Save Project</button>
+        <button id="loadProjectBtn" aria-label="Load project from JSON">📂 Load Project</button>
+        <input type="file" id="loadProjectInput" accept=".json" hidden aria-hidden="true">
+        <button id="importImageBtn" aria-label="Import image file">🖼 Import Image</button>
+        <input type="file" id="importImageInput" accept="image/*" hidden aria-hidden="true">
+      </fieldset>
+    </section>
 
-      <div class="canvas-wrapper">
-        <canvas id="pixelCanvas" width="320" height="320"></canvas>
-        <div class="anim-controls">
-          <button id="playBtn">▶ Play</button>
-          <button id="pauseBtn">⏸ Pause</button>
-          <label>Speed (ms): <input type="number" id="speedInput" value="150" min="30" max="2000"></label>
-          <label>
+    <section class="main-area">
+
+      <section class="canvas-section">
+        <canvas id="pixelCanvas" width="320" height="320" aria-label="Pixel art canvas for drawing"></canvas>
+        <section class="anim-controls" aria-label="Animation controls">
+          <button id="playBtn" aria-label="Play animation">▶ Play</button>
+          <button id="pauseBtn" aria-label="Pause animation">⏸ Pause</button>
+          <label for="speedInput">Speed (ms): <input type="number" id="speedInput" value="150" min="30" max="2000"></label>
+          <label for="onionToggle">
             <input type="checkbox" id="onionToggle"> Onion Skin
           </label>
-          <button id="zoomOutBtn">➖ Zoom</button>
-          <button id="zoomInBtn">➕ Zoom</button>
-          <span id="zoomValue" class="zoom-value">100%</span>
-        </div>
-      </div>
+          <button id="zoomOutBtn" aria-label="Zoom out">➖ Zoom</button>
+          <button id="zoomInBtn" aria-label="Zoom in">➕ Zoom</button>
+          <span id="zoomValue" class="zoom-value" aria-live="polite">100%</span>
+        </section>
+      </section>
 
-      <div class="sidebar">
-        <h3>Frames</h3>
-        <div class="frame-list" id="frameList"></div>
+      <aside class="sidebar" aria-label="Frame management">
+        <h2>Frames</h2>
+        <div class="frame-list" id="frameList" role="region" aria-label="Frame thumbnails"></div>
         <div class="frame-controls">
-          <button id="addFrameBtn">+ Add</button>
-          <button id="duplicateFrameBtn">⧉ Duplicate</button>
-          <button id="deleteFrameBtn">✕ Delete</button>
+          <button id="addFrameBtn" aria-label="Add new frame">+ Add</button>
+          <button id="duplicateFrameBtn" aria-label="Duplicate current frame">⧉ Duplicate</button>
+          <button id="deleteFrameBtn" aria-label="Delete current frame">✕ Delete</button>
         </div>
-      </div>
+      </aside>
 
-    </div>
+    </section>
 
-  </div>
+  </main>
   <script src="script.js"></script>
 </body>
 
