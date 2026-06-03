@@ -70,19 +70,33 @@ body {
   padding: 5px 10px;
   cursor: pointer;
   font-size: 12px;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
   white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(233, 69, 96, 0.2);
+  font-weight: 500;
 }
 
-.toolbar button:hover,
-.toolbar button:active {
+.toolbar button:hover {
   background: #e94560;
   color: #fff;
+  box-shadow: 0 4px 12px rgba(233, 69, 96, 0.4);
+  transform: translateY(-2px);
+}
+
+.toolbar button:active {
+  background: #d63548;
+  transform: translateY(0);
+}
+
+.toolbar button:focus {
+  outline: 2px solid #e94560;
+  outline-offset: 2px;
 }
 
 .toolbar button.active {
   background: #e94560;
   color: #fff;
+  box-shadow: 0 4px 12px rgba(233, 69, 96, 0.4);
 }
 
 /* MAIN AREA */
@@ -133,11 +147,25 @@ body {
   padding: 5px 12px;
   cursor: pointer;
   font-size: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  font-weight: 500;
 }
 
-.anim-controls button:hover,
-.anim-controls button:active {
+.anim-controls button:hover {
   background: #e94560;
+  box-shadow: 0 4px 12px rgba(233, 69, 96, 0.4);
+  transform: translateY(-2px);
+}
+
+.anim-controls button:active {
+  background: #d63548;
+  transform: translateY(0);
+}
+
+.anim-controls button:focus {
+  outline: 2px solid #e94560;
+  outline-offset: 2px;
 }
 
 .zoom-value {
@@ -218,11 +246,25 @@ body {
   cursor: pointer;
   font-size: 11px;
   width: 100%;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  font-weight: 500;
 }
 
-.frame-controls button:hover,
-.frame-controls button:active {
+.frame-controls button:hover {
   background: #e94560;
+  box-shadow: 0 4px 12px rgba(233, 69, 96, 0.4);
+  transform: translateY(-2px);
+}
+
+.frame-controls button:active {
+  background: #d63548;
+  transform: translateY(0);
+}
+
+.frame-controls button:focus {
+  outline: 2px solid #e94560;
+  outline-offset: 2px;
 }
 
 /* =====================
