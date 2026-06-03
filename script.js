@@ -1,9 +1,9 @@
 // CONSTANTS & STATE
 const GRID_SIZE = 32;
 const CELL_SIZE = 10;
-const ZOOM_MIN = 1;
-const ZOOM_MAX = 4;
-const ZOOM_STEP = 1;
+const ZOOM_MIN = 0.5;
+const ZOOM_MAX = 2;
+const ZOOM_STEP = 0.5;
 
 const canvas = document.getElementById('pixelCanvas');
 const ctx = canvas.getContext('2d');
